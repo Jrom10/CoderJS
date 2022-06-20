@@ -1,20 +1,17 @@
-// let nombre = prompt ("ingrese su nombre")
-// let correcto = nombre + " " + "ingresado"
-// alert(correcto)
-
-// if (nombre=="tincho"){
-//     alert("sos PETE")
-// }else {
-//     alert("estas Sobrado")
-// }
-
-// let numero = 6
-// let nan = (numero > 5)
-// if(nan==true){
-//     alert ("es true mi rey")
-// }
-
-let entrada = prompt ("ingrese dato")
-while(entrada!="ESC"){
-    alert("el usuario ingreso" + entrada)
+let opcion = prompt ("Gracias por utilizar nuestro servicio, seleccione una opción\n1-Soporte técnico\n2-Ventas\n3-Facturación\nEscriba 'ESC' para terminar")
+while(opcion !="ESC"){
+    switch (opcion) {
+        case "1": let nombre1 = prompt ("Ingrese su n° de cliente")
+        alert(`Cliente N°${nombre1}. Soporte Tecnico se comunicara con usted`)
+        break;
+        case "2": let nombre2 = prompt ("Ingrese su n° de cliente")
+        alert(`Cliente N°${nombre2}. Sector Ventas se comunicara con usted`)
+        break;
+        case "3": let nombre3 = prompt ("Ingrese su n° de cliente")
+        alert(`Cliente N°${nombre3}. Sector Facturaciones se comunicara con usted`)
+        break;
+        default: alert("Ingrese una opcion Valida")
+        opcion= prompt ("seleccione una opción\n1-Soporte técnico\n2-Ventas\n3-Facturación\nEscriba 'ESC' para terminar")
+        break;
+    }
 }
