@@ -12,6 +12,14 @@ const mascotas = [felino,can,tortu]
 
 const productos = mascotas.concat(monturas)
 
+const productosPromo = productos.map ((el) => {
+    return {
+        nombre: el.nombre,
+        valor: Math.round(el.valor / 1.5)
+    }}
+)
+
+
 class Producto {
     constructor(nombre, valor) {
         this.nombre = nombre
@@ -43,7 +51,8 @@ if (nombre === "ADMIN"){
             let returnAdmin = menuAdmin()
             nombre = prompt ("Ingrese nombre de usuario")
             menuUser(returnAdmin)
-        }else {
+        }
+        else {
             alert("Contraseña incorrecta")
         }
 }
@@ -62,64 +71,99 @@ function menuAdmin() {
     return agregado
 }
 
-function menuUser(returnAdmin){
-let opcion = parseInt(prompt (`Bienvenido ${nombre}. Por favor, seleccione el item/servicio que desea adquirir:\n1-Montura\n2-Mascotas\nEscriba 'ESC' para terminar`))
-switch (opcion) {
+function menuUser(){
+    let opcion = parseInt(prompt (`Bienvenido ${nombre}. Por favor, seleccione el item/servicio que desea adquirir:\n1-Montura\n2-Mascotas\n3-Cambio de Faccion\nEscriba 'ESC' para terminar`))
+    let promo = prompt ("Ingrese codigo promocional. Solo valido para monturas y mascotas")
+    
+    switch (opcion) {
+        
+        case 1: 
+            let monturaElegida = parseInt(prompt (`Seleccione la montura que desea adquirir:\n1-${monturas[0].nombre}\n2-${monturas[1].nombre}\n3-${monturas[2].nombre}`))
+            if (promo == "promo" || promo == "PROMO") {
+                switch (monturaElegida) {
+                    case 1:
+                        alert(`Descuento aplicado.\nEl monto a abonar es $${productosPromo[3].valor} `)
+                    break
 
-    case 1: 
-        let monturaElegida = parseInt(prompt (`Seleccione la montura que desea adquirir:\n1-${monturas[0].nombre}\n2-${monturas[1].nombre}\n3-${monturas[2].nombre}`))
-        switch (monturaElegida) {
-            case 1:
-                alert(`El monto a abonar es ${monturas[0].valor} `)
-            break
+                    case 2:
+                        alert(`Descuento aplicado.\nEl monto a abonar es $${productosPromo[4].valor} `)
+                    break
 
-            case 2:
-                alert(`El monto a abonar es ${monturas[1].valor} `)
-            break
+                    case 3:
+                        alert(`Descuento aplicado.\nEl monto a abonar es $${productosPromo[5].valor} `)
+                    break
+                }
+            }
+            else {
+                alert ("Codigo promocional no reconocible")
+                switch (monturaElegida) {
+                    case 1:
+                        alert(`El monto a abonar es $${monturas[0].valor} `)
+                    break
 
-            case 3:
-                alert(`El monto a abonar es ${monturas[2].valor} `)
-            break
-        }
-    break
+                    case 2:
+                        alert(`El monto a abonar es $${monturas[1].valor} `)
+                    break
 
-    case 2: 
-        let mascotaElegida = parseInt(prompt (`Seleccione la montura que desea adquirir:\n1-${mascotas[0].nombre}\n2-${mascotas[1].nombre}\n3-${mascotas[2].nombre}`))
-        switch (mascotaElegida) {
-            case 1:
-                alert(`El monto a abonar es ${mascotas[0].valor} `)
-            break
+                    case 3:
+                        alert(`El monto a abonar es $${monturas[2].valor} `)
+                    break
+                }
+            }
+        break
 
-            case 2:
-                alert(`El monto a abonar es ${mascotas[1].valor} `)
-            break
+        case 2: 
+            let mascotaElegida = parseInt(prompt (`Seleccione la montura que desea adquirir:\n1-${mascotas[0].nombre}\n2-${mascotas[1].nombre}\n3-${mascotas[2].nombre}`))
+            if (promo == "promo" || promo == "PROMO") {
+                switch (mascotaElegida) {
+                    case 1:
+                        alert(`Descuento aplicado.\nEl monto a abonar es $${productosPromo[0].valor} `)
+                    break
 
-            case 3:
-                alert(`El monto a abonar es ${mascotas[2].valor} `)
-            break
-        }
-    break
+                    case 2:
+                        alert(`Descuento aplicado.\nEl monto a abonar es $${productosPromo[1].valor} `)
+                    break
 
-    default:
-        alert ("Ingrese una opcion Valida")
-        opcion = "esc"
-    break
+                    case 3:
+                        alert(`Descuento aplicado.\nEl monto a abonar es $${productosPromo[2].valor} `)
+                    break
+                }
+            } 
+            else {
+                alert ("Codigo promocional no reconocible")
+                switch (mascotaElegida) {
+                    case 1:
+                        alert(`El monto a abonar es $${mascotas[0].valor} `)
+                    break
+
+                    case 2:
+                        alert(`El monto a abonar es $${mascotas[1].valor} `)
+                    break
+
+                    case 3:
+                        alert(`El monto a abonar es $${mascotas[2].valor} `)
+                    break
+                }
+            }
+        break
+
+        case 3:
+            let cambioFaccion = 300
+            let faccion = prompt(`Selecciones a que faccion pertenece\n1-Alianza\n2-Horda`)
+            if (faccion == "1"){
+                alert(`Usted realizara el cambio de faccion a Horda. Su valor es de $${cambioFaccion}`)
+            }
+            else if (faccion == "2") {
+                alert(`Usted realizara el cambio de faccion a Alianza. Su valor es de $${cambioFaccion}`)
+            }
+            else {
+                alert (`Opcion invalida`)
+            }
+        break
+
+        default:
+            alert ("Ingrese una opcion Valida")
+            opcion = "esc"
+        break
+    }
 }
-}
-
-
-
-
-
-
-
-//para llamar dentro de un array
-//console.log(listamascotas[0])
-
-/*for (let i = 0; i<listamascotas.length; i++){
-    alert (listaMascotas[i])
-}*/
-
-//console.log (listamascotas.join(", "))
-
-//console.log (productos)
