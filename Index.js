@@ -19,6 +19,24 @@ const productosPromo = productos.map ((el) => {
     }}
 )
 
+function suma(numeroUno, numeroDos) {
+    let resultado = numeroUno + numeroDos;
+    return resultado;
+}
+
+function resta(numeroUno, numeroDos) {
+    let resultado = numeroUno - numeroDos;
+    return resultado;
+}
+
+function multiplicacion(numeroUno, numeroDos) {
+    let resultado = numeroUno * numeroDos;
+    return resultado;
+}
+
+let valorFaccion = 300
+let totalProductos = 0
+let carrito = []
 
 class Producto {
     constructor(nombre, valor) {
@@ -72,98 +90,135 @@ function menuAdmin() {
 }
 
 function menuUser(){
-    let opcion = parseInt(prompt (`Bienvenido ${nombre}. Por favor, seleccione el item/servicio que desea adquirir:\n1-Montura\n2-Mascotas\n3-Cambio de Faccion\nEscriba 'ESC' para terminar`))
-    let promo = prompt ("Ingrese codigo promocional. Solo valido para monturas y mascotas")
+    let opcion = 0;
+    
+    do{
+        opcion = parseInt(prompt(`Bienvenido ${nombre}\nSeleccione una opcion para continuar. (ESC para salir)\n1-Comprar\n2-Pagar\n3-Eliminar compras`))
     
     switch (opcion) {
-        
-        case 1: 
-            let monturaElegida = parseInt(prompt (`Seleccione la montura que desea adquirir:\n1-${monturas[0].nombre}\n2-${monturas[1].nombre}\n3-${monturas[2].nombre}`))
-            if (promo == "promo" || promo == "PROMO") {
-                switch (monturaElegida) {
-                    case 1:
-                        alert(`Descuento aplicado.\nEl monto a abonar es $${productosPromo[3].valor} `)
-                    break
-
-                    case 2:
-                        alert(`Descuento aplicado.\nEl monto a abonar es $${productosPromo[4].valor} `)
-                    break
-
-                    case 3:
-                        alert(`Descuento aplicado.\nEl monto a abonar es $${productosPromo[5].valor} `)
-                    break
-                }
-            }
-            else {
-                alert ("Codigo promocional no reconocible")
-                switch (monturaElegida) {
-                    case 1:
-                        alert(`El monto a abonar es $${monturas[0].valor} `)
-                    break
-
-                    case 2:
-                        alert(`El monto a abonar es $${monturas[1].valor} `)
-                    break
-
-                    case 3:
-                        alert(`El monto a abonar es $${monturas[2].valor} `)
-                    break
-                }
-            }
-        break
-
-        case 2: 
-            let mascotaElegida = parseInt(prompt (`Seleccione la montura que desea adquirir:\n1-${mascotas[0].nombre}\n2-${mascotas[1].nombre}\n3-${mascotas[2].nombre}`))
-            if (promo == "promo" || promo == "PROMO") {
-                switch (mascotaElegida) {
-                    case 1:
-                        alert(`Descuento aplicado.\nEl monto a abonar es $${productosPromo[0].valor} `)
-                    break
-
-                    case 2:
-                        alert(`Descuento aplicado.\nEl monto a abonar es $${productosPromo[1].valor} `)
-                    break
-
-                    case 3:
-                        alert(`Descuento aplicado.\nEl monto a abonar es $${productosPromo[2].valor} `)
-                    break
-                }
-            } 
-            else {
-                alert ("Codigo promocional no reconocible")
-                switch (mascotaElegida) {
-                    case 1:
-                        alert(`El monto a abonar es $${mascotas[0].valor} `)
-                    break
-
-                    case 2:
-                        alert(`El monto a abonar es $${mascotas[1].valor} `)
-                    break
-
-                    case 3:
-                        alert(`El monto a abonar es $${mascotas[2].valor} `)
-                    break
-                }
-            }
-        break
-
+        case 1:
+            agregarProducto()
+            menuUser()
+        case 2:
+            metodoPago()
+            mostrarTotal(totalProductos)
         case 3:
-            let cambioFaccion = 300
-            let faccion = prompt(`Selecciones a que faccion pertenece\n1-Alianza\n2-Horda`)
-            if (faccion == "1"){
-                alert(`Usted realizara el cambio de faccion a Horda. Su valor es de $${cambioFaccion}`)
-            }
-            else if (faccion == "2") {
-                alert(`Usted realizara el cambio de faccion a Alianza. Su valor es de $${cambioFaccion}`)
-            }
-            else {
-                alert (`Opcion invalida`)
-            }
-        break
+            reinicioCarrito()
+            menuUser()
+        default: 
+            alert("seleccione una opcion valida")
+            
+        } 
+    } while (opcion !== "") 
+}
 
-        default:
-            alert ("Ingrese una opcion Valida")
-            opcion = "esc"
-        break
-    }
+function agregarProducto() {
+    let seleccionarProducto = 0
+    do {
+        seleccionarProducto = parseInt(prompt(`Seleccione el producto que desea agregar al carrito.\n su total hasta ahora es $${totalProductos}\n1-Monturas\n2-Mascotas\n3-Cambio de Faccion\n0-Finallizar Compra`))
+
+        if (seleccionarProducto === 1) {
+            agregarMontura()
+        }
+        if (seleccionarProducto === 2) {
+            agregarMascota()
+        }
+        if (seleccionarProducto === 3) {
+            totalProductos = suma(totalProductos, valorFaccion)
+            carrito.push
+            alert ("producto añadido")
+        }
+        if (seleccionarProducto >= 4) {
+            alert("Seleccione una opcion valida")
+        }
+
+    }while (seleccionarProducto !== 0)
+
+}
+
+
+function agregarMontura() {
+    let seleccionarMontura = 0
+    do {
+        seleccionarMontura = parseInt(prompt(`Seleccione montura.\n1-Corcel Celestial\n2-dragon Alanegra\n3-Atracacielos\n0-Finallizar Compra / Volver al menu anterior`))
+
+        if (seleccionarMontura === 1) {
+            totalProductos = suma(totalProductos, corcel.valor)
+            carrito.push
+            alert ("producto añadido")
+        }if (seleccionarMontura === 2) {
+            totalProductos = suma(totalProductos, dragon.valor)
+            carrito.push
+            alert ("producto añadido")
+        }if (seleccionarMontura === 3) {
+            totalProductos = suma(totalProductos, atracacielos.valor)
+            carrito.push
+            alert ("producto añadido")
+        }if (seleccionarMontura >= 4) {
+            alert("Seleccione una opcion valida")
+        }
+
+    }while (seleccionarMontura !== 0)
+
+}
+
+function agregarMascota() {
+    let seleccionarMascota = 0
+    do {
+        seleccionarMascota = parseInt(prompt(`Seleccione montura.\n1-Crepusculin\n2-Can de Trasiego\n3-Tortusiu\n0-Finallizar Compra / Volver al menu anterior`))
+
+        if (seleccionarMascota === 1) {
+            totalProductos = suma(totalProductos, felino.valor)
+            carrito.push
+            alert ("producto añadido")
+        }if (seleccionarMascota === 2) {
+            totalProductos = suma(totalProductos, can.valor)
+            carrito.push
+            alert ("producto añadido")
+        }if (seleccionarMascota === 3) {
+            totalProductos = suma(totalProductos, tortu.valor)
+            carrito.push
+            alert ("producto añadido")
+        }if (seleccionarMascota >= 4) {
+            alert("Seleccione opcion valida")
+        }
+
+    }while (seleccionarMascota !== 0)
+
+}
+
+
+function mostrarTotal(resultado) {
+    alert(`El total a pagar es: $${resultado}\n Gracias por su compra`)
+    
+}
+
+function metodoPago() {
+    let transferencia = totalProductos
+    let efectivo = totalProductos * 0.8
+    let credito = totalProductos * 1.2
+    let metodoPago = 0
+
+        metodoPago = parseInt(prompt(`El total en el carrito es de: $${totalProductos} \nComo desea pagarlo?\n 1.Efectivo\n 2.Transferencia\n 3.Tarjeta de credito`))
+        if (metodoPago === 1) {
+            alert("Se ha aplicado un descuento del 20%");
+            totalProductos = efectivo;
+
+        }if (metodoPago === 2) {
+            totalProductos = transferencia;
+
+        }if (metodoPago === 3) {
+            alert("Se ha aplicado un recargo del 20%");
+            totalProductos = credito;
+
+        }if (metodoPago >= 4) {
+            alert("Seleccione una opcion valida")
+            
+        }
+}
+
+function reinicioCarrito() {
+    alert("Se eliminaron los productos")
+    totalProductos = multiplicacion(totalProductos, 0);
+    carrito = []
 }
