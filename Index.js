@@ -12,12 +12,21 @@ const mascotas = [felino,can,tortu]
 
 const productos = mascotas.concat(monturas)
 
-const productosPromo = productos.map ((el) => {
+
+let mayor = document.getElementById(array)
+for (const item of productos) {
+    let itemLista = document.createElement("li")
+    itemLista.innerHTML = `<b>Productos:</b> ${item.nombre}  -  <b>Valor:</b> $${item.valor}`
+    array.appendChild(itemLista)
+}
+
+/*const productosPromo = productos.map ((el) => {
     return {
         nombre: el.nombre,
         valor: Math.round(el.valor / 1.5)
-    }}
-)
+    }
+}
+*/
 
 function suma(numeroUno, numeroDos) {
     let resultado = numeroUno + numeroDos;
@@ -79,6 +88,7 @@ else if (nombre !== "" && nombre !== "esc" && nombre !== "ESC") {
 }
 else{
     alert ("Ingrese una opcion valida")
+    ESC
 }
 
 
@@ -107,9 +117,9 @@ function menuUser(){
             menuUser()
         default: 
             alert("seleccione una opcion valida")
-            
+            ESC
         } 
-    } while (opcion !== "") 
+    } while (opcion !== "")
 }
 
 function agregarProducto() {
@@ -190,7 +200,6 @@ function agregarMascota() {
 
 function mostrarTotal(resultado) {
     alert(`El total a pagar es: $${resultado}\n Gracias por su compra`)
-    
 }
 
 function metodoPago() {
@@ -199,26 +208,25 @@ function metodoPago() {
     let credito = totalProductos * 1.2
     let metodoPago = 0
 
-        metodoPago = parseInt(prompt(`El total en el carrito es de: $${totalProductos} \nComo desea pagarlo?\n 1.Efectivo\n 2.Transferencia\n 3.Tarjeta de credito`))
+    metodoPago = parseInt(prompt(`El total en el carrito es de: $${totalProductos} \nComo desea pagarlo?\n 1.Efectivo\n 2.Transferencia\n 3.Tarjeta de credito`))
         if (metodoPago === 1) {
-            alert("Se ha aplicado un descuento del 20%");
-            totalProductos = efectivo;
+            alert("Se ha aplicado un descuento del 20%")
+            totalProductos = efectivo
 
         }if (metodoPago === 2) {
-            totalProductos = transferencia;
+            totalProductos = transferencia
 
         }if (metodoPago === 3) {
-            alert("Se ha aplicado un recargo del 20%");
-            totalProductos = credito;
+            alert("Se ha aplicado un recargo del 20%")
+            totalProductos = credito
 
         }if (metodoPago >= 4) {
-            alert("Seleccione una opcion valida")
-            
+            alert("Seleccione una opcion valida")            
         }
 }
 
 function reinicioCarrito() {
     alert("Se eliminaron los productos")
-    totalProductos = multiplicacion(totalProductos, 0);
+    totalProductos = multiplicacion(totalProductos, 0)
     carrito = []
 }
