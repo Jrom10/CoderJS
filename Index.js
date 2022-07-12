@@ -1,58 +1,160 @@
-const corcel = {nombre: "Corcel Celestial", valor: 150}
-const dragon = {nombre: "Dragon Alanegra", valor: 250}
-const atracacielos = {nombre: "Atracacielos", valor: 350}
+
+const corcel = {nombre: "Corcel Celestial", valor: 150, tipo: "Montura"}
+const dragon = {nombre: "Dragon Alanegra", valor: 250, tipo: "Montura"}
+const atracacielos = {nombre: "Atracacielos", valor: 350, tipo: "Montura"}
 
 const monturas = [corcel,dragon,atracacielos]
 
-const felino = {nombre: "Crepusculin", valor: 50}
-const can = {nombre: "Can de Trasiego", valor: 45}
-const tortu = {nombre: "Tortusiu", valor: 60}
+const felino = {nombre: "Crepusculin", valor: 50, tipo: "Mascota"}
+const can = {nombre: "Can de Trasiego", valor: 45, tipo: "Mascota"}
+const tortu = {nombre: "Tortusiu", valor: 60, tipo: "Mascota"}
 
 const mascotas = [felino,can,tortu]
 
 const productos = mascotas.concat(monturas)
 
+const nuevaMontura = []
+const nuevaMascota = []
+const nuevoServicio =[]
 
-let mayor = document.getElementById(array)
-for (const item of productos) {
-    let itemLista = document.createElement("li")
-    itemLista.innerHTML = `<b>Productos:</b> ${item.nombre}  -  <b>Valor:</b> $${item.valor}`
-    array.appendChild(itemLista)
-}
-
-/*const productosPromo = productos.map ((el) => {
-    return {
-        nombre: el.nombre,
-        valor: Math.round(el.valor / 1.5)
-    }
-}
-*/
-
-function suma(numeroUno, numeroDos) {
-    let resultado = numeroUno + numeroDos;
-    return resultado;
-}
-
-function resta(numeroUno, numeroDos) {
-    let resultado = numeroUno - numeroDos;
-    return resultado;
-}
-
-function multiplicacion(numeroUno, numeroDos) {
-    let resultado = numeroUno * numeroDos;
-    return resultado;
-}
-
-let valorFaccion = 300
-let totalProductos = 0
-let carrito = []
+let formulario
+let inputNombre
+let inputValor
+let inputTipo
+let tablaMonturas
+let tablaMascotas
+let tablaServicio
 
 class Producto {
-    constructor(nombre, valor) {
+    constructor(nombre, valor, tipo) {
         this.nombre = nombre
         this.valor = valor
+        this.tipo = tipo
     }
 }
+
+function inicializarElementos() {
+formulario = document.getElementById("formulario")
+inputNombre = document.getElementById("inputNombre")
+inputValor = document.getElementById("inputValor")
+inputTipo = document.getElementById("inputTipo")
+tablaMonturas = document.getElementById("tablaMonturas")
+tablaMascotas = document.getElementById("tablaMascotas")
+tablaServicio = document.getElementById("tablaServicio")
+}
+
+function inicializarEventos(){
+formulario.onsubmit = (event) => validarFormulario(event);
+}
+
+function validarFormulario(event) {
+    event.preventDefault()
+    let nombre = inputNombre.value
+    let valor = parseFloat(inputValor.value)
+    let tipo = inputTipo.value
+    let nuevoProducto = new Producto (nombre, valor, tipo)
+
+    if (tipo==="Montura"){
+        nuevaMontura.push(nuevoProducto)
+        formulario.reset()
+        limpiarTablaMonturas()
+        agregarProductosMontura()
+    }
+    else if (tipo==="Mascota") {
+        nuevaMascota.push(nuevoProducto)
+        formulario.reset()
+        limpiarTablaMascotas()
+        agregarProductosMascota()
+    }
+    else{
+        nuevoServicio.push(nuevoProducto)
+        formulario.reset()
+        limpiarTablaServicio()
+        agregarProductosServicio()
+    }
+}
+
+
+function agregarProductosMontura() {
+    for (const item of nuevaMontura) {
+        let itemListaMontura = document.createElement("tr")
+        itemListaMontura.innerHTML = `
+            <td>${item.nombre}</td>
+            <td>$${item.valor}</td>
+            <td>${item.tipo}</td>`
+        tablaMonturas.tBodies[0].append(itemListaMontura)
+    }
+}
+
+function agregarProductosMascota() {
+    for (const item of nuevaMascota) {
+        let itemListaMascota = document.createElement("tr")
+        itemListaMascota.innerHTML = `
+            <td>${item.nombre}</td>
+            <td>$${item.valor}</td>
+            <td>${item.tipo}</td>`
+        tablaMascotas.tBodies[0].append(itemListaMascota)
+        }
+}
+
+function agregarProductosServicio() {
+    for (const item of nuevoServicio) {
+        let itemListaServicio = document.createElement("tr")
+        itemListaServicio.innerHTML = `
+            <td>${item.nombre}</td>
+            <td>$${item.valor}</td>
+            <td>${item.tipo}</td>`
+        tablaServicio.tBodies[0].append(itemListaServicio)
+        }
+}
+
+function limpiarTablaMonturas() {
+    while (tablaMonturas.rows.length > 1) {
+        tablaMonturas.deleteRow(1)
+    }
+}
+
+function limpiarTablaMascotas() {
+    while (tablaMascotas.rows.length > 1) {
+        tablaMascotas.deleteRow(1)
+    }
+}
+
+function limpiarTablaServicio() {
+    while (tablaServicio.rows.length > 1) {
+        tablaServicio.deleteRow(1)
+    }
+}
+
+function main() {
+    inicializarElementos()
+    inicializarEventos()
+    agregarProductos()
+}
+
+main();
+
+
+
+let listaMascotas = document.getElementById(masco)
+for (const item of mascotas) {
+    let itemLista = document.createElement("li")
+    itemLista.innerHTML = `<b>Producto:</b> ${item.nombre}  -  <b>Valor:</b> $${item.valor}  -  <b>Tipo:</b> ${item.tipo}`
+    masco.appendChild(itemLista)
+}
+
+let listaMonturas = document.getElementById(montu)
+for (const item of monturas) {
+    let itemLista = document.createElement("li")
+    itemLista.innerHTML = `<b>Producto:</b> ${item.nombre}  -  <b>Valor:</b> $${item.valor}  -  <b>Tipo:</b> ${item.tipo}`
+    montu.appendChild(itemLista)
+}
+
+for (const item of mascotas) {
+    let itemLista = document.createElement("li")
+    itemLista.innerHTML = `<b>Producto:</b> ${item.nombre}  -  <b>Valor:</b> $${item.valor}  -  <b>Tipo:</b> ${item.tipo}`
+    masco.appendChild(itemLista)
+    }
 
 function nuevoProducto() {
     let numeroProductos = parseInt(prompt("Cantidad de productos a registrar"))
@@ -146,7 +248,6 @@ function agregarProducto() {
 
 }
 
-
 function agregarMontura() {
     let seleccionarMontura = 0
     do {
@@ -196,7 +297,6 @@ function agregarMascota() {
     }while (seleccionarMascota !== 0)
 
 }
-
 
 function mostrarTotal(resultado) {
     alert(`El total a pagar es: $${resultado}\n Gracias por su compra`)
