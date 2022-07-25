@@ -43,7 +43,7 @@ class Producto {
 function generarId() {
     let id = 8
     for (let i = 8; i <= productosSuma.length+1; i++){
-    id = i}
+        id = i}
     return id
 }
 
@@ -64,18 +64,18 @@ class Carrito {
 
 
 function inicializarElementos() {
-formulario = document.getElementById("formulario")
-inputNombre = document.getElementById("inputNombre")
-inputValor = document.getElementById("inputValor")
-inputTipo = document.getElementById("inputTipo")
-tablaCompra = document.getElementById("tablaCompra")
-oferta = document.getElementById("oferta")
-botonAgregar = document.getElementsByClassName("botonAgregar")
-botonAdmin = document.getElementById("botonAdmin")
-limpiar = document.getElementById("limpiar")
-terminarCompra = document.getElementById("terminarCompra")
-total = document.getElementById ("total")
-alertCarrito = document.getElementById ("")
+    formulario = document.getElementById("formulario")
+    inputNombre = document.getElementById("inputNombre")
+    inputValor = document.getElementById("inputValor")
+    inputTipo = document.getElementById("inputTipo")
+    tablaCompra = document.getElementById("tablaCompra")
+    oferta = document.getElementById("oferta")
+    botonAgregar = document.getElementsByClassName("botonAgregar")
+    botonAdmin = document.getElementById("botonAdmin")
+    limpiar = document.getElementById("limpiar")
+    terminarCompra = document.getElementById("terminarCompra")
+    total = document.getElementById ("total")
+    alertCarrito = document.getElementById ("")
 }
 
 function inicializarEventos(){
@@ -89,19 +89,19 @@ function validarFormulario(event) {
     let tipo = inputTipo.value
     let nuevoProducto = new Producto (nombre, valor, tipo)
     
-    if ((tipo==="Montura") && (valor !== "") && (nombre !== "")){
+    if (tipo==="Montura" && valor > 0 && nombre !== ""){
         monturas.push(nuevoProducto)
         productosSuma = mascotas.concat(monturas, servicio)
         alertRegistro()
         mostrarCards()
     }
-    else if ((tipo==="Mascota") && (valor !== "") && (nombre !== "")) {
+    else if (tipo==="Mascota" && valor > 0 && nombre !== "") {
         mascotas.push(nuevoProducto)
         productosSuma = mascotas.concat(monturas, servicio)
         alertRegistro()
         mostrarCards()
     }
-    else if ((tipo==="Servicio") && (valor !== "") && (nombre !== "")) {
+    else if (tipo==="Servicio" && valor > 0 && nombre !== "") {
         servicio.push(nuevoProducto)
         productosSuma = mascotas.concat(monturas, servicio)
         alertRegistro()
