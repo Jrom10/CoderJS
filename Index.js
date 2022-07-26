@@ -107,6 +107,9 @@ function validarFormulario(event) {
         alertRegistro()
         mostrarCards()
     }
+    else{ 
+        alertError()
+    }
     formulario.reset()
     let st = actualizarCarrito()
     agregarCarrito(st)
@@ -257,6 +260,14 @@ function alertComprar(carrito) {
                 }
             })
         }
+    })
+}
+
+function alertError() {
+    Swal.fire({
+        icon: 'error',
+        title: 'Registro Fallido',
+        text: 'Complete nombre y valor del producto a ingresar.',
     })
 }
 
