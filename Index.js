@@ -1,20 +1,23 @@
 
-const corcel = {nombre: "Corcel Celestial", valor: 150, tipo: "Montura", id:"4"}
-const dragon = {nombre: "Dragon Alanegra", valor: 250, tipo: "Montura", id:"5"}
-const atracacielos = {nombre: "Atracacielos", valor: 350, tipo: "Montura", id:"6"}
+const corcel = {nombre: "Corcel Celestial", valor: 150, tipo: "Montura", id:"8"}
+const dragon = {nombre: "Dragon Alanegra", valor: 250, tipo: "Montura", id:"9"}
+const atracacielos = {nombre: "Atracacielos", valor: 350, tipo: "Montura", id:"10"}
 
 const monturas = [corcel,dragon,atracacielos]
 
-const felino = {nombre: "Crepusculin", valor: 50, tipo: "Mascota", id:"1"}
-const can = {nombre: "Can de Trasiego", valor: 45, tipo: "Mascota", id:"2"}
-const tortu = {nombre: "Tortusiu", valor: 60, tipo: "Mascota", id:"3"}
+const felino = {nombre: "Crepusculin", valor: 50, tipo: "Mascota", id:"5"}
+const can = {nombre: "Can de Trasiego", valor: 45, tipo: "Mascota", id:"6"}
+const tortu = {nombre: "Tortusiu", valor: 60, tipo: "Mascota", id:"7"}
 
-const faccion = {nombre: "Cambio de Faccion", valor:500, tipo: "servicio", id:"7"}
+const faccion = {nombre: "Cambio de Faccion", valor:500, tipo: "servicio", id:"11"}
 
 const mascotas = [felino,can,tortu]
 const servicio = [faccion]
 
-let productosSuma = mascotas.concat(monturas, servicio)
+let def = prodDef()
+let productosParciales = mascotas.concat(monturas, servicio)
+let productosSuma = productosParciales.concat(def)
+
 console.log(productosSuma)
 
 let formulario
@@ -41,8 +44,8 @@ class Producto {
 }
 
 function generarId() {
-    let id = 8
-    for (let i = 8; i <= productosSuma.length+1; i++){
+    let id = 12
+    for (let i = 12; i <= productosSuma.length+1; i++){
         id = i}
     return id
 }
@@ -93,18 +96,21 @@ function validarFormulario(event) {
         monturas.push(nuevoProducto)
         productosSuma = mascotas.concat(monturas, servicio)
         alertRegistro()
+        pedirPosts()
         mostrarCards()
     }
     else if (tipo==="Mascota" && valor > 0 && nombre !== "") {
         mascotas.push(nuevoProducto)
         productosSuma = mascotas.concat(monturas, servicio)
         alertRegistro()
+        pedirPosts()
         mostrarCards()
     }
     else if (tipo==="Servicio" && valor > 0 && nombre !== "") {
         servicio.push(nuevoProducto)
         productosSuma = mascotas.concat(monturas, servicio)
         alertRegistro()
+        pedirPosts()
         mostrarCards()
     }
     else{ 
@@ -318,4 +324,25 @@ function main() {
 }
 
 main()
+
+const listaPba = document.getElementById("prueba")
+
+const pedirPosts = async () => {
+    const resp = await fetch('/data.json')
+    const data = await resp.json()
+    data.forEach((post) => {
+        prueba.innerHTML += renderCard(post)
+    })
+}
+
+async function prodDef (){
+    async function obtenerArray() {
+        const res = await fetch(`/data.json`);
+        const data = await res.json();
+        return data;
+        }
+    const datos = await obtenerArray();
+    console.log(datos)
+    return datos
+}
 
