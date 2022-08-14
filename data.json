@@ -1,6 +1,14 @@
 [
-    {"nombre": "Mascota Def 1", "valor": 350, "id": 1},
-    {"nombre": "Mascota Def 2", "valor": 350, "id": 2},
-    {"nombre": "Montura Def 1", "valor": 550, "id": 3},
-    {"nombre": "Montura Def 2", "valor": 550, "id": 4}
+    {"nombre": "Mecharda", "valor": 150, "tipo": "Mascota", "id": 8},
+    {"nombre": "Flamilipe ", "valor": 50, "tipo": "Mascota", "id": 9},
+    {"nombre": "Bonzardo", "valor": 250, "tipo": "Montura", "id": 10},
+    {"nombre": "Clarita", "valor": 450, "tipo": "Montura", "id": 11},
+    {"nombre": "Corcel Celestial", "valor": 150, "tipo": "Montura", "id": 1},
+    {"nombre": "Dragon Alanegra", "valor": 250, "tipo": "Montura", "id": 2},
+    {"nombre": "Atracacielos", "valor": 350, "tipo": "Montura", "id": 3},
+    {"nombre": "Crepusculin", "valor": 50, "tipo": "Mascota", "id": 4},
+    {"nombre": "Can de Trasiego", "valor": 45, "tipo": "Mascota", "id": 5},
+    {"nombre": "Tortusiu", "valor": 60, "tipo": "Mascota", "id": 6},
+    {"nombre": "Cambio de Faccion", "valor":500, "tipo": "servicio", "id": 7}
 ]
+

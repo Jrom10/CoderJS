@@ -1,24 +1,5 @@
 
-const corcel = {nombre: "Corcel Celestial", valor: 150, tipo: "Montura", id:"8"}
-const dragon = {nombre: "Dragon Alanegra", valor: 250, tipo: "Montura", id:"9"}
-const atracacielos = {nombre: "Atracacielos", valor: 350, tipo: "Montura", id:"10"}
-
-const monturas = [corcel,dragon,atracacielos]
-
-const felino = {nombre: "Crepusculin", valor: 50, tipo: "Mascota", id:"5"}
-const can = {nombre: "Can de Trasiego", valor: 45, tipo: "Mascota", id:"6"}
-const tortu = {nombre: "Tortusiu", valor: 60, tipo: "Mascota", id:"7"}
-
-const faccion = {nombre: "Cambio de Faccion", valor:500, tipo: "servicio", id:"11"}
-
-const mascotas = [felino,can,tortu]
-const servicio = [faccion]
-
-let def = prodDef()
-let productosParciales = mascotas.concat(monturas, servicio)
-let productosSuma = productosParciales.concat(def)
-
-console.log(productosSuma)
+let productosSuma = []
 
 let formulario
 let inputNombre
@@ -43,9 +24,19 @@ class Producto {
     }
 }
 
+
+async function obtenerArray() {
+    const resp = await fetch('data.json')
+    const data = await resp.json()
+    data.forEach(datos => {
+        let productoNuevo = new Producto (datos.nombre, datos.valor, datos.tipo, datos.id)
+        productosSuma.push(productoNuevo)
+    })
+}
+
 function generarId() {
-    let id = 12
-    for (let i = 12; i <= productosSuma.length+1; i++){
+    let id = 0
+    for (let i = 0; i <= productosSuma.length+1; i++){
         id = i}
     return id
 }
@@ -92,33 +83,18 @@ function validarFormulario(event) {
     let tipo = inputTipo.value
     let nuevoProducto = new Producto (nombre, valor, tipo)
     
-    if (tipo==="Montura" && valor > 0 && nombre !== ""){
-        monturas.push(nuevoProducto)
-        productosSuma = mascotas.concat(monturas, servicio)
+    if (valor > 0 && nombre !== ""){
+        productosSuma.push(nuevoProducto)
         alertRegistro()
-        pedirPosts()
         mostrarCards()
-    }
-    else if (tipo==="Mascota" && valor > 0 && nombre !== "") {
-        mascotas.push(nuevoProducto)
-        productosSuma = mascotas.concat(monturas, servicio)
-        alertRegistro()
-        pedirPosts()
-        mostrarCards()
-    }
-    else if (tipo==="Servicio" && valor > 0 && nombre !== "") {
-        servicio.push(nuevoProducto)
-        productosSuma = mascotas.concat(monturas, servicio)
-        alertRegistro()
-        pedirPosts()
-        mostrarCards()
+        console.log(productosSuma)
     }
     else{ 
         alertError()
     }
     formulario.reset()
-    let st = actualizarCarrito()
-    agregarCarrito(st)
+    let storageLoad = actualizarCarrito()
+    agregarCarrito(storageLoad)
 }
 
 function renderCard(producto) {
@@ -126,7 +102,8 @@ function renderCard(producto) {
     <div class="card m-3" style="width: 18rem;">
         <div class="card-body">
             <h5 class="card-title">${producto.id}-${producto.nombre}</h5>
-            <p class="card-text">$ ${producto.valor}</p>
+            <p class="card-text"> <b>Producto:</b> ${producto.tipo}</p>
+            <p class="card-text">$ ${producto.valor}-${producto.tipo}</p>
             <a href="#" class="btn btn-primary botonAgregar" id=${producto.id}>Agregar al carrito</a>
         </div>
     </div>
@@ -148,10 +125,10 @@ function mostrarCards() {
 }
 
 
-function agregarCarrito (st) {
+function agregarCarrito (storageLoad) {
     let carrito = new Carrito(1)
-    if(st !== null){
-        for (const item of st.productos) {
+    if(storageLoad !== null){
+        for (const item of storageLoad.productos) {
             carrito.productos.push(item)
             limpiarCarrito()
             renderizarCarrito(carrito)
@@ -194,8 +171,8 @@ function eliminarCarrito() {
     alertLimpiar()
     localStorage.removeItem("carrito")
     tablaCompra.innerHTML = ""
-    let st = actualizarCarrito()
-    agregarCarrito(st)
+    let storageLoad = actualizarCarrito()
+    agregarCarrito(storageLoad)
 }
 
 function renderizarCarrito(carrito) {
@@ -318,7 +295,8 @@ function alertAgregar(){
     .showToast()
 }
 
-function main() {
+async function main() {
+    await obtenerArray()
     inicializarElementos()
     inicializarEventos()
 }
@@ -327,22 +305,4 @@ main()
 
 const listaPba = document.getElementById("prueba")
 
-const pedirPosts = async () => {
-    const resp = await fetch('/data.json')
-    const data = await resp.json()
-    data.forEach((post) => {
-        prueba.innerHTML += renderCard(post)
-    })
-}
-
-async function prodDef (){
-    async function obtenerArray() {
-        const res = await fetch(`/data.json`);
-        const data = await res.json();
-        return data;
-        }
-    const datos = await obtenerArray();
-    console.log(datos)
-    return datos
-}
 
