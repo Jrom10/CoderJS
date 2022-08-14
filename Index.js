@@ -24,7 +24,6 @@ class Producto {
     }
 }
 
-
 async function obtenerArray() {
     const resp = await fetch('data.json')
     const data = await resp.json()
@@ -56,8 +55,7 @@ class Carrito {
     }
 }
 
-
-function inicializarElementos() {
+function iniciarElementos() {
     formulario = document.getElementById("formulario")
     inputNombre = document.getElementById("inputNombre")
     inputValor = document.getElementById("inputValor")
@@ -72,11 +70,11 @@ function inicializarElementos() {
     alertCarrito = document.getElementById ("")
 }
 
-function inicializarEventos(){
-    formulario.onsubmit = (event) => validarFormulario(event)
+function iniciarEventos(){
+    formulario.onsubmit = (event) => validarForm(event)
 }
 
-function validarFormulario(event) {
+function validarForm(event) {
     event.preventDefault()
     let nombre = inputNombre.value
     let valor = parseFloat(inputValor.value)
@@ -109,11 +107,6 @@ function renderCard(producto) {
     </div>
     `
     return cardRendered
-}
-
-function renovarStorage (productos) {
-    localStorage.clear()
-    localStorage.setItem("productos", JSON.stringify(productos))
 }
 
 
@@ -297,12 +290,9 @@ function alertAgregar(){
 
 async function main() {
     await obtenerArray()
-    inicializarElementos()
-    inicializarEventos()
+    iniciarElementos()
+    iniciarEventos()
 }
 
 main()
-
-const listaPba = document.getElementById("prueba")
-
 
